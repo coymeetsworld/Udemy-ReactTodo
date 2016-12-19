@@ -24,6 +24,10 @@ module.exports = {
 	},
 	resolve: {			
 		root: __dirname, /* variable in node.js that gives path to file you're in */
+		modulesDirectories: [
+			'node_modules',
+			'./app/components'
+		],
 		alias: { /* Webpack aliases */
 			applicationStyles: 'app/styles/app.scss',
 		},
