@@ -12,4 +12,19 @@ describe('TodoApp', () => {
 		expect(TodoApp).toExist();
 	});	
 	
+	it('should add todo to the todos state on handleAddTodo', () => {
+		var todoText = 'clean email';
+		var todoApp = TestUtils.renderIntoDocument(<TodoApp/>);
+		
+		/* Empty array, remove default todos. */
+		todoApp.setState({todos: []});
+		todoApp.handleAddTodo(todoText);
+		
+		/* First item should be the todoText. */
+		expect(todoApp.state.todos[0].text).toBe(todoText);
+		/* There should only be one item in todos array. */
+		expect(todoApp.state.todos.length).toBe(1);
+
+	});
+	
 });
