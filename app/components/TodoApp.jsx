@@ -15,32 +15,48 @@ var TodoApp = React.createClass({
 			todos: [
 				{
 					id: uuid(),
-					text: 'Walk the dog'
+					text: 'Walk the dog',
+					completed: false
 				}, {
 					id: uuid(),
-					text: 'Clean the yard'
+					text: 'Clean the yard',
+					completed: true
 				}, {
 					id: uuid(),
-					text: 'Take out trash'
+					text: 'Take out trash',
+					completed: true
 				}, {
 					id: uuid(),
-					text: 'Wash dishes'
+					text: 'Wash dishes',
+					completed: false
 				}, {
 					id: uuid(),
-					text: 'Finish React tutorials'
+					text: 'Finish React tutorials',
+					completed: false
 				}
 			]
 		}	
 	},
-
+	handleToggle: function(id) {
+		var updatedTodos = this.state.todos.map((todo) => {
+			if (todo.id === id) {
+				todo.completed = !todo.completed;
+			}			
+			return todo;
+		});
+		
+		this.setState({
+			todos: updatedTodos
+		});
+	},
 	handleAddTodo: function (todoText) {
 		this.setState({
 			todos: [
 				...this.state.todos,
 				{
 					id: uuid(),
-					//id: this.state.todos.length+1, What's wrong with doing this? No need for a library, simpler
-					text: todoText
+					text: todoText,
+					completed: false
 				}
 			]
 		});
@@ -58,7 +74,7 @@ var TodoApp = React.createClass({
 		return (
 			<div>
 				<TodoSearch onSearch={this.handleSearch}/>
-				<TodoList todos={todos}/>
+				<TodoList todos={todos} onToggle={this.handleToggle}/>
 				<AddTodo onAddTodo={this.handleAddTodo}/>
 			</div>
 		)
