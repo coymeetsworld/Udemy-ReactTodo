@@ -36,7 +36,6 @@ module.exports = {
 			});
 		}
 		
-		
 		// Sort todos with non-completed first
 		filteredTodos.sort((a, b) => {
 			if (!a.completed && b.completed) { return -1; }		
