@@ -31,6 +31,7 @@ module.exports = {
 		],
 		alias: { /* Webpack aliases */
 			applicationStyles: 'app/styles/app.scss',
+			actions: 'app/actions/actions.jsx'
 		},
 		extensions: ['', '.js', '.jsx']
 	},
