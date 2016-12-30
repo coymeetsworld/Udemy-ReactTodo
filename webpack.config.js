@@ -32,7 +32,8 @@ module.exports = {
 		alias: { /* Webpack aliases */
 			applicationStyles: 'app/styles/app.scss',
 			actions: 'app/actions/actions.jsx',
-			reducers: 'app/reducers/reducers.jsx' /* needed to simplify require statements: i.e. var reducers = require('reducers'); */
+			reducers: 'app/reducers/reducers.jsx', 
+			configureStore: 'app/store/configureStore.jsx'
 		},
 		extensions: ['', '.js', '.jsx']
 	},
