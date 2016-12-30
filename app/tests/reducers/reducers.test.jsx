@@ -31,4 +31,48 @@ describe('Reducers', () => {
 		});
 	});
 	
+	describe('todosReducer', () => {
+		it('should add new todo', () => {
+			var action = {
+				type: 'ADD_TODO',
+				text: 'Walk the dog'
+			};
+			
+			var res = reducers.todosReducer(df([]), df(action));
+			
+			expect(res.length).toEqual(1);
+			expect(res[0].text).toEqual(action.text);
+		});
+		
+		it('should toggle incomplete todo as complete', () => {
+			
+			var todos = [{
+				id: '123',
+				text: 'Something',
+				completed: true,
+				createdAt: 123,
+				completedAt: 125	
+			}];
+			
+			var ToggleAction = {
+				type: 'TOGGLE_TODO',
+				id: '123'
+			};
+			
+			var updatedTodos = reducers.todosReducer(df(todos), df(ToggleAction));
+			expect(updatedTodos.length).toEqual(1); // Shouldn't have removed it
+			expect(updatedTodos[0].text).toEqual(todos[0].text); // Shouldn't have changed the todo
+			expect(updatedTodos[0].completed).toEqual(false); // When toggling a completed todo it should be incomplete.
+			expect(updatedTodos[0].completedAt).toEqual(undefined); // Completed at date turns to undefined when its incompleted	
+
+			// Toggle it back
+			var res = reducers.todosReducer(df(updatedTodos), df(ToggleAction));
+			expect(res.length).toEqual(1); // Shouldn't have removed it
+			expect(res[0].text).toEqual(todos[0].text); // Shouldn't have changed the todo
+			expect(res[0].completed).toEqual(true); // Completed todo should be incompleted
+			expect(res[0].completedAt).toNotEqual(undefined); // CompletedAt date should now be undefined
+
+		});
+	});
+	
 });
