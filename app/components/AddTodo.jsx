@@ -13,7 +13,7 @@ export var AddTodo = React.createClass({
 		if (newTodoText !== '') {
 			this.refs.newTodo.value = '';
 			//this.props.onAddTodo(newTodoText);// prop no longer gets passed down
-			dispatch(actions.addTodo(newTodoText));
+			dispatch(actions.startAddTodo(newTodoText));
 		} else {
 			this.refs.newTodo.focus(); /* If data is invalid, cursor will go back to text field. +1 Usability. */
 		}
