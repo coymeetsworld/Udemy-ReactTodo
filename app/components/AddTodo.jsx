@@ -1,15 +1,19 @@
 var React = require('react');
+//Connected means connected to store, w/o connect means no store, which is used for testing.
+var {connect} = require('react-redux');
+var actions = require('actions');
 
-var AddTodo = React.createClass({
+export var AddTodo = React.createClass({
 	
 	handleSubmit: function(e) {
 		e.preventDefault();
-		
+		var {dispatch} = this.props;	
 		var newTodoText = this.refs.newTodo.value;
 		
 		if (newTodoText !== '') {
 			this.refs.newTodo.value = '';
-			this.props.onAddTodo(newTodoText);
+			//this.props.onAddTodo(newTodoText);// prop no longer gets passed down
+			dispatch(actions.addTodo(newTodoText));
 		} else {
 			this.refs.newTodo.focus(); /* If data is invalid, cursor will go back to text field. +1 Usability. */
 		}
@@ -29,4 +33,5 @@ var AddTodo = React.createClass({
 	
 });
 
-module.exports = AddTodo;
+//module.exports = AddTodo;
+export default connect()(AddTodo); //Since AddTodo doesn't need state, don't need to pass it in as an argument.
