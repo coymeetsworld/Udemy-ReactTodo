@@ -6,47 +6,22 @@ var moment = require('moment');
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo'; // adds default, which is connected to the redux store
 import TodoSearch from 'TodoSearch';
-var TodoAPI = require('TodoAPI');
 
 var TodoApp = React.createClass({
 	
-	getInitialState: function() {
-		return {
-			showCompleted: false,
-			searchText: '',
-			todos: TodoAPI.getTodos()
-		}	
-	},
-	/* Gets fired after the props or state changes. */
-	componentDidUpdate: function() {
-		TodoAPI.setTodos(this.state.todos);
-	},
-	handleAddTodo: function (todoText) {
-		this.setState({
-			todos: [
-				...this.state.todos,
-				{
-					id: uuid(),
-					text: todoText,
-					completed: false,
-					createdAt: moment().unix(),
-					completedAt: undefined
-				}
-			]
-		});
-	},
+	// TodoApp doesn't handle state, so we can remove getInitialState and componentDidUpdate	
+
+	// handleAddTodo has been converted to actions/reducers
 	
-	handleSearch: function(showCompleted, searchText) {
-		this.setState({
-			showCompleted: showCompleted,
-			searchText: searchText.toLowerCase()
-		});
-	},
+	// handleSearch also been converted
 	
 	render: function() {
-		var {todos, showCompleted, searchText} = this.state;
-		var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
+		
+		//These are done in TodoList now
+		//var {todos, showCompleted, searchText} = this.state;
+		//var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
 
+		//TodoSearch and AddTodo components know how to dispatch actions to store, can simplify here. */
 		return (
 			<div>
 				<h1 className="page-title">Todo App</h1>
@@ -54,9 +29,9 @@ var TodoApp = React.createClass({
 				<div className="row">
 					<div className="column small-centered small-11 medium-6 large-5">	
 						<div className="container">
-							<TodoSearch onSearch={this.handleSearch}/>
+							<TodoSearch/> 
 							<TodoList/>
-							<AddTodo onAddTodo={this.handleAddTodo}/>
+							<AddTodo/>
 						</div>
 					</div>
 				</div>
