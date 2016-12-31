@@ -5,7 +5,7 @@ var moment = require('moment');
 //var TodoList = require('TodoList');
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo'; // adds default, which is connected to the redux store
-var TodoSearch = require('TodoSearch');
+import TodoSearch from 'TodoSearch';
 var TodoAPI = require('TodoAPI');
 
 var TodoApp = React.createClass({
