@@ -49,7 +49,7 @@ describe('Reducers', () => {
 			expect(res[0]).toEqual(action.todo);
 		});
 		
-		it('should toggle incomplete todo as complete', () => {
+		it('should toggle todo', () => {
 			
 			var todos = [{
 				id: '123',
@@ -58,24 +58,23 @@ describe('Reducers', () => {
 				createdAt: 123,
 				completedAt: 125	
 			}];
-			
-			var ToggleAction = {
-				type: 'TOGGLE_TODO',
-				id: '123'
+		
+			var updates = {
+				completed: false,
+				completedAt: null
+			};
+
+			var action = {
+				type: 'UPDATE_TODO',
+				id: todos[0].id,
+				updates
 			};
 			
-			var updatedTodos = reducers.todosReducer(df(todos), df(ToggleAction));
+			var updatedTodos = reducers.todosReducer(df(todos), df(action));
 			expect(updatedTodos.length).toEqual(1); // Shouldn't have removed it
 			expect(updatedTodos[0].text).toEqual(todos[0].text); // Shouldn't have changed the todo
-			expect(updatedTodos[0].completed).toEqual(false); // When toggling a completed todo it should be incomplete.
-			expect(updatedTodos[0].completedAt).toEqual(undefined); // Completed at date turns to undefined when its incompleted	
-
-			// Toggle it back
-			var res = reducers.todosReducer(df(updatedTodos), df(ToggleAction));
-			expect(res.length).toEqual(1); // Shouldn't have removed it
-			expect(res[0].text).toEqual(todos[0].text); // Shouldn't have changed the todo
-			expect(res[0].completed).toEqual(true); // Completed todo should be incompleted
-			expect(res[0].completedAt).toNotEqual(undefined); // CompletedAt date should now be undefined
+			expect(updatedTodos[0].completed).toEqual(updates.completed); // When toggling a completed todo it should be incomplete.
+			expect(updatedTodos[0].completedAt).toEqual(updates.completedAt); // Completed at date turns to undefined when its incompleted	
 
 		});
 		

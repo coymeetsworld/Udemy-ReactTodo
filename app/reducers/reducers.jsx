@@ -27,17 +27,15 @@ export var todosReducer = (state = [], action) => {
 				...state,
 				action.todo
 			];	
-		case 'TOGGLE_TODO':
+		case 'UPDATE_TODO':
 			return state.map((todo) => {
 				if (todo.id === action.id) {
-					var nextCompleted = !todo.completed;
+					/* All work previously here is now done in our asynchronous action inside startToggleTodo in actions.jsx. */
 					return {
 						...todo,
-						completed: nextCompleted,
-						completedAt: nextCompleted ? moment().unix() : undefined
+						...action.updates
 					};
 				}	
-				
 				return todo;
 			});
 		case 'ADD_TODOS': 

@@ -23,7 +23,7 @@ export var Todo = React.createClass({
 
 		return (
 			<div className={todoClassName} onClick={() => { 					
-				dispatch(actions.toggleTodo(id));	// dispatch comes from connect() below
+				dispatch(actions.startToggleTodo(id, !completed));	// dispatch comes from connect() below
 			}}>
 				<div>
 					<input type="checkbox" checked={completed}/>
