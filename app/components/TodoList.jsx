@@ -8,18 +8,20 @@ export var TodoList = React.createClass({
 	render: function() {
 		
 		var {todos, showCompleted, searchText} = this.props;
-		var renderTodos =  () => {
-			if (todos.length === 0) {
+		var renderTodos = () => {
+			var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
+
+			if (filteredTodos.length === 0) {
 				return (
 					<p className="container__message">Nothing to Do</p>
-				)
+				);
 			}
-			return TodoAPI.filterTodos(todos, showCompleted, searchText).map((todo) => {
+			return filteredTodos.map((todo) => {
 				return (
 					/* When generating multiple instances of a component, you need to give them a unique id so React knows how to handle each one of them. */
 					<Todo key={todo.id} {...todo}/>
 					/* Spread operator will pull each attribute of todo down to the Todo component. */
-				)	
+				);
 			});
 		};
 		
@@ -27,7 +29,7 @@ export var TodoList = React.createClass({
 			<div>
 				{renderTodos()}
 			</div>	
-		)	
+		);
 	}	
 });
 

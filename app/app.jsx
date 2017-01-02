@@ -9,14 +9,8 @@ var actions = require('actions');
 var store = require('configureStore').configure(); /* Returns redux store object. */
 var TodoAPI = require('TodoAPI');
 
-store.subscribe(() => {
-	var state = store.getState();
-	console.log('New state', state);	
-	TodoAPI.setTodos(state.todos);
-});
-
-var initialTodos = TodoAPI.getTodos(); /* Goes into local storage. */
-store.dispatch(actions.addTodos(initialTodos));
+/* Create async action and gets data from Firebase. */
+store.dispatch(actions.startAddTodos());
 
 //Load foundation
 $(document).foundation();
