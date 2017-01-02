@@ -1,6 +1,8 @@
 var webpack = require('webpack');
 var path = require('path');
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 module.exports = {
 	
 	/* Where it should start processing your code. */
@@ -16,6 +18,11 @@ module.exports = {
 		new webpack.ProvidePlugin({				
 			$: "jquery", /* allows us to not specify requring jQuery files in jsx files */
 			jQuery: "jquery"
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			compressor: {
+				warnings: false
+			}	
 		})
 	],
 	output: {
@@ -55,5 +62,5 @@ module.exports = {
 			path.resolve(__dirname, './node_modules/foundation-sites/scss')	
 		]	
 	},
-	devtool: 'cheap-module-eval-source-map' /* for debugging, shows actual code not webpack code */
+	devtool: process.env.NODE_ENV === 'production' ? undefined : 'cheap-module-eval-source-map' /* for debugging, shows actual code not webpack code */
 };
