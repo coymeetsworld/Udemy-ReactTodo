@@ -1,29 +1,28 @@
-var React = require('react');
-var uuid = require('node-uuid');
-var moment = require('moment');
+import React from 'react';
+import * as Redux from 'react-redux';
 
 //var TodoList = require('TodoList');
 import TodoList from 'TodoList';
 import AddTodo from 'AddTodo'; // adds default, which is connected to the redux store
 import TodoSearch from 'TodoSearch';
+import * as actions from 'actions';
 
-var TodoApp = React.createClass({
+export var TodoApp = React.createClass({
 	
-	// TodoApp doesn't handle state, so we can remove getInitialState and componentDidUpdate	
+	onLogout(e) {
+		var {dispatch} = this.props;
+		e.preventDefault();
 
-	// handleAddTodo has been converted to actions/reducers
+		dispatch(actions.startLogout());
+	},
 	
-	// handleSearch also been converted
-	
-	render: function() {
+	render() {
 		
-		//These are done in TodoList now
-		//var {todos, showCompleted, searchText} = this.state;
-		//var filteredTodos = TodoAPI.filterTodos(todos, showCompleted, searchText);
-
-		//TodoSearch and AddTodo components know how to dispatch actions to store, can simplify here. */
 		return (
 			<div>
+				<div className="page-actions">
+					<a href="#" onClick={this.onLogout}>Logout</a>	
+				</div>
 				<h1 className="page-title">Todo App</h1>
 				
 				<div className="row">
@@ -41,4 +40,4 @@ var TodoApp = React.createClass({
 	
 });
 
-module.exports = TodoApp;
+export default Redux.connect()(TodoApp);
