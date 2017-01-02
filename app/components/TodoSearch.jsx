@@ -3,7 +3,7 @@ var {connect} = require('react-redux');
 var actions = require('actions');
 
 //export so we can test w/o passing in state?
-export var TodoSearch = React.createClass({
+export class TodoSearch extends React.Component {
 
 	//now our application works by dispatching one method which has both showCompleted and searchText.
 	//were going to be dispatching our 2 separate actions (inside of the actions.jsx file, our setSearchText and toggleShowCompleted actions)
@@ -16,7 +16,7 @@ export var TodoSearch = React.createClass({
 	},*/
 	
 
-	render: function() {
+	render () {
 		var {dispatch, showCompleted, searchText} = this.props;
 		
 		return (
@@ -38,7 +38,7 @@ export var TodoSearch = React.createClass({
 			</div>
 		)
 	}
-});
+};
 
 //module.exports = TodoSearch;
 export default connect(

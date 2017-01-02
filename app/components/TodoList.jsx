@@ -3,9 +3,9 @@ var {connect} = require('react-redux'); /* Companion to Provider. Provider provi
 import Todo from 'Todo'; // using ES6 destructuring i.e. {Todo} would give us the pure React component Todo, but we just want the connected version in our real component
 var TodoAPI = require('TodoAPI');
 
-export var TodoList = React.createClass({
+export class TodoList extends React.Component {
 	
-	render: function() {
+	render () {
 		
 		var {todos, showCompleted, searchText} = this.props;
 		var renderTodos = () => {
@@ -31,7 +31,7 @@ export var TodoList = React.createClass({
 			</div>	
 		);
 	}	
-});
+};
 
 // connect gets called after component gets created.
 export default connect(

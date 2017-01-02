@@ -3,19 +3,24 @@ import * as Redux from 'react-redux';
 
 import * as actions from 'actions';
 
-export var Login = React.createClass({
+export class Login extends React.Component{
 	
-	onLogin() {
+	constructor (props) {
+		super(props);
+		this.onLogin = this.onLogin.bind(this);
+	}
+
+	onLogin () {
 		var {dispatch} = this.props;	
 		
 		dispatch(actions.startLogin());
-	},
+	}
 	
 	/* ES6 shortcut for:
 	render: function() {
 		
 	}*/
-	render() {
+	render () {
 		return (
 			<div>
 				<h1 className="page-title">Todo App</h1>
@@ -32,6 +37,6 @@ export var Login = React.createClass({
 		);
 	}
 	
-});
+};
 
 export default Redux.connect()(Login);

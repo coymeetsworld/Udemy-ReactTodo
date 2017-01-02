@@ -3,9 +3,9 @@ var React = require('react');
 var {connect} = require('react-redux');
 var actions = require('actions');
 
-export var AddTodo = React.createClass({
+export class AddTodo extends React.Component {
 	
-	handleSubmit: function(e) {
+	handleSubmit (e) {
 		e.preventDefault();
 		var {dispatch} = this.props;	
 		var newTodoText = this.refs.newTodo.value;
@@ -17,13 +17,12 @@ export var AddTodo = React.createClass({
 		} else {
 			this.refs.newTodo.focus(); /* If data is invalid, cursor will go back to text field. +1 Usability. */
 		}
-		
-	},
+	}
 
-	render: function() {
+	render () {
 		return(
 			<div className="container__footer">
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={this.handleSubmit.bind(this)}>
 					<input type="text" ref="newTodo" placeholder="What do you need to do?"/>
 					<button className="button expanded">Add Todo</button>	
 				</form>
@@ -31,7 +30,7 @@ export var AddTodo = React.createClass({
 		)
 	}
 	
-});
+};
 
 //module.exports = AddTodo;
 export default connect()(AddTodo); //Since AddTodo doesn't need state, don't need to pass it in as an argument.
