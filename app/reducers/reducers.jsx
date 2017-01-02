@@ -28,6 +28,7 @@ export var todosReducer = (state = [], action) => {
 				action.todo
 			];	
 		case 'UPDATE_TODO':
+		
 			return state.map((todo) => {
 				if (todo.id === action.id) {
 					/* All work previously here is now done in our asynchronous action inside startToggleTodo in actions.jsx. */
@@ -47,3 +48,18 @@ export var todosReducer = (state = [], action) => {
 			return state;	
 	}
 };
+
+export var authReducer = (state = {}, action) => {
+	switch(action.type) {
+		case 'LOGIN': 
+			return {
+				uid: action.uid
+			};	
+		case 'LOGOUT':
+			return {};
+		default:
+			return state;
+	}	
+}
+
+
